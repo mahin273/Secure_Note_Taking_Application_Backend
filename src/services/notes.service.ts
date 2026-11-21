@@ -100,3 +100,27 @@ export async function deleteNote(noteId: string, userId: string): Promise<void> 
     throw new AppError('NOT_FOUND', 'Note not found', 404);
   }
 }
+
+export async function listAllNotes(
+  ownerId?: string,
+  limit: number = 20,
+  after?: string
+): Promise<{ data: any[]; nextCursor: string | null }> {
+  const query: Record<string, any> = {};
+
+  if (ownerId) {
+    query.owner = new Types.ObjectId(ownerId);
+  }
+
+  if (after) {
+    query._id = { $lt: new Types.ObjectId(after) };
+  }
+
+  // Uses Index #3 if owner is provided; default _id index if omitted
+  const notes = await Note.find(query)
+    .sort({ _id: -1 })
+    .limit(limit + 1)
+    .lean();
+
+  return paginateCursorResults(notes, limit);
+}
