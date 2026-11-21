@@ -32,7 +32,6 @@ const postSchema = new Schema<IPostDocument>(
   }
 );
 
-// Explicit Index Definition (per DesignDoc Section 5 & 14)
 // Index #4: Scenario 2 $lookup join + sort, and cascade delete of a user's posts
 postSchema.index({ author: 1, _id: -1 });
 

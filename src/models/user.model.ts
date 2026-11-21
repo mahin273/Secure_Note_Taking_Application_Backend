@@ -50,14 +50,13 @@ const userSchema = new Schema<IUserDocument>(
   }
 );
 
-// Explicit Index Definitions (per DesignDoc Section 5 & 14)
 // Index #1: Email lookup for login and uniqueness constraint
 userSchema.index({ email: 1 }, { unique: true });
 
 // Index #2: Multikey index for Scenario 1 filtered by one interest ($match before $unwind)
 userSchema.index({ interests: 1 });
 
-// Note for reviewers: Admin user list sorts by _id descending and uses the default _id index;
+// Admin user list sorts by _id descending and uses the default _id index;
 // no extra index is needed.
 
 export const User = model<IUserDocument>('User', userSchema);

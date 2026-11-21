@@ -6,7 +6,7 @@ import * as authService from '../services/auth.service';
 
 const router = Router();
 
-// Rate limiter for login endpoint (DesignDoc Section 2)
+// Rate limiter for login endpoint
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // Limit each IP to 10 login requests per window
