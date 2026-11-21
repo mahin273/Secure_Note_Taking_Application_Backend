@@ -32,7 +32,6 @@ const noteSchema = new Schema<INoteDocument>(
   }
 );
 
-// Explicit Index Definition (per DesignDoc Section 5 & 14)
 // Index #3: User's note list (newest first via cursor), admin list filtered by owner, and cascade delete
 noteSchema.index({ owner: 1, _id: -1 });
 
