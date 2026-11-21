@@ -3,6 +3,8 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { env } from './config/env';
 import { errorHandler, AppError } from './middleware/errorHandler';
+import authRouter from './routes/auth.routes';
+import usersRouter from './routes/users.routes';
 
 const app: Application = express();
 
@@ -23,6 +25,10 @@ app.get('/api/health', (_req: Request, res: Response) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// Mount API routes
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 // Fallback for undefined routes
 app.use((_req: Request, _res: Response, next: NextFunction) => {
