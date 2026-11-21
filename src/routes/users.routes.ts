@@ -13,6 +13,7 @@ import {
 } from '../utils/pagination';
 import { sanitizeUser } from '../services/auth.service';
 import * as usersService from '../services/users.service';
+import * as postsService from '../services/posts.service';
 
 const router = Router();
 
@@ -48,7 +49,30 @@ const userIdParamSchema = z.object({
   id: objectIdSchema,
 });
 
-// All users routes require authentication
+// GET /api/users/:id/posts (Public: Scenario 2)
+router.get(
+  '/:id/posts',
+  validateParams(userIdParamSchema),
+  validateQuery(cursorPaginationQuerySchema),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { limit, after } = req.query as unknown as {
+        limit: number;
+        after?: string;
+      };
+      const result = await postsService.getUserPosts(
+        req.params.id,
+        limit,
+        after
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+// All subsequent routes require authentication
 router.use(authenticate);
 
 // GET /api/users/me (Own profile)
