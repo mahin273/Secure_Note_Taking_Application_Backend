@@ -8,6 +8,7 @@ import usersRouter from './routes/users.routes';
 import notesRouter from './routes/notes.routes';
 import adminRouter from './routes/admin.routes';
 import postsRouter from './routes/posts.routes';
+import reportsRouter from './routes/reports.routes';
 
 const app: Application = express();
 
@@ -35,6 +36,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/posts', postsRouter);
+app.use('/api/reports', reportsRouter);
 
 // Fallback for undefined routes
 app.use((_req: Request, _res: Response, next: NextFunction) => {
