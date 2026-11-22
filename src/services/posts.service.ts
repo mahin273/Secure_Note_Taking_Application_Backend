@@ -92,3 +92,35 @@ export async function getUserPosts(
     nextCursor,
   };
 }
+
+export interface PostsListResponse {
+  posts: any[];
+  nextCursor: string | null;
+}
+
+export async function getAllPosts(
+  limit: number = 10,
+  after?: string
+): Promise<PostsListResponse> {
+  const query: any = {};
+  if (after) {
+    query._id = { $lt: new Types.ObjectId(after) };
+  }
+
+  const posts = await Post.find(query)
+    .sort({ _id: -1 })
+    .limit(limit + 1)
+    .populate('author', 'name email')
+    .lean();
+
+  const hasMore = posts.length > limit;
+  const returnedPosts = hasMore ? posts.slice(0, limit) : posts;
+  const nextCursor = hasMore
+    ? returnedPosts[returnedPosts.length - 1]._id.toString()
+    : null;
+
+  return {
+    posts: returnedPosts,
+    nextCursor,
+  };
+}
