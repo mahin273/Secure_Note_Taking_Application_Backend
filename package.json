@@ -9,6 +9,7 @@
     "dev": "tsx watch src/server.ts",
     "seed:admin": "tsx src/scripts/seedAdmin.ts",
     "seed:data": "tsx src/scripts/seedLargeData.ts",
+    "seed:demo": "tsx src/scripts/seedDemoUsers.ts",
     "verify:explain": "tsx src/scripts/verifyExplain.ts"
   },
   "dependencies": {
