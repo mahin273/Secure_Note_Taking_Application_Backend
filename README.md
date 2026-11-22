@@ -79,6 +79,7 @@ The API will be accessible at `http://localhost:3005` (or configured `PORT`).
 | `npm run build` | Compiles TypeScript into `dist/` with `tsc`. |
 | `npm run start` | Runs the compiled server from `dist/server.js`. |
 | `npm run seed:admin` | Idempotently seeds the admin user from environment variables. |
+| `npm run seed:demo` | Seeds 1 admin and 2 standard users (with realistic sample notes and posts) for evaluator testing. |
 | `npm run seed:data` | Generates a benchmark dataset of ~10,000 documents (users, notes, posts) via batch inserts. |
 | `npm run verify:explain` | Runs `explain('executionStats')` across all queries and aggregations, verifying index usage. |
 
