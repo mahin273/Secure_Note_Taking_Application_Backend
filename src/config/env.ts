@@ -18,12 +18,17 @@ const envSchema = z.object({
   ADMIN_PASSWORD: z.string().min(8, 'ADMIN_PASSWORD must be at least 8 characters long'),
 });
 
-const parsedEnv = envSchema.safeParse(process.env);
-
-if (!parsedEnv.success) {
-  console.error('Invalid environment variables:');
-  console.error(parsedEnv.error.format());
+let envData: z.infer<typeof envSchema>;
+try {
+  envData = envSchema.parse(process.env);
+} catch (error) {
+  if (error instanceof z.ZodError) {
+    console.error('Invalid environment variables:');
+    console.error(error.format());
+  } else {
+    console.error('Unexpected error parsing environment variables:', error);
+  }
   process.exit(1);
 }
 
-export const env = parsedEnv.data;
+export const env = envData;
