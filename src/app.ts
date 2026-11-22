@@ -28,6 +28,23 @@ app.use(
 );
 app.use(express.json({ limit: '1mb' }));
 
+// Root endpoint
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({
+    name: 'Secure Note-Taking Application REST API',
+    version: '1.0.0',
+    status: 'online',
+    endpoints: {
+      health: '/api/health',
+      posts: '/api/posts',
+      auth: '/api/auth',
+      notes: '/api/notes',
+      users: '/api/users',
+      reports: '/api/reports',
+    },
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (_req: Request, res: Response) => {
   res.status(200).json({
