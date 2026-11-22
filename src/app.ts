@@ -13,10 +13,16 @@ import reportsRouter from './routes/reports.routes';
 const app: Application = express();
 
 // Security and utility middleware
+const allowedOrigins = env.CORS_ORIGIN.includes(',')
+  ? env.CORS_ORIGIN.split(',').map((o) => o.trim())
+  : env.CORS_ORIGIN === '*'
+  ? true
+  : env.CORS_ORIGIN;
+
 app.use(helmet());
 app.use(
   cors({
-    origin: env.CORS_ORIGIN,
+    origin: allowedOrigins,
     credentials: true,
   })
 );
