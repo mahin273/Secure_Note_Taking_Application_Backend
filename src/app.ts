@@ -33,6 +33,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
 // Mount API routes
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/admin/users', usersRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/posts', postsRouter);
