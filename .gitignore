@@ -1,6 +1,6 @@
 node_modules/
 dist/
-.env
+.env*
 
 # Ignore all markdown files except README.md
 *.md
