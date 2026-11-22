@@ -6,7 +6,8 @@ A production-ready, highly optimized RESTful API built with Node.js, Express, Ty
 
 ## Live Deployment & Health Status
 
-- **Live API Endpoint:** [https://secure-note-taking-application-backend-3muw.onrender.com](https://secure-note-taking-application-backend-3muw.onrender.com)
+- **Live Frontend Application:** [https://securenotes-seven.vercel.app](https://securenotes-seven.vercel.app)
+- **Live API Endpoint (Backend):** [https://secure-note-taking-application-backend-3muw.onrender.com](https://secure-note-taking-application-backend-3muw.onrender.com)
 - **Health Check:** [https://secure-note-taking-application-backend-3muw.onrender.com/api/health](https://secure-note-taking-application-backend-3muw.onrender.com/api/health)
 - **Cloud Database:** Hosted on MongoDB Atlas (M0 Cluster) with active replica set support.
 
